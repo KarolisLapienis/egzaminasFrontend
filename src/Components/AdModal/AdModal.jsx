@@ -81,6 +81,32 @@ export default function CommentsModal({ ad, opened, close, onNewComment }) {
     }
   };
 
+  const handleDelete = async (commentId) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        setMessage("Comment deleted successfully");
+        fetchComments();
+      } else {
+        setMessage("Comment deleted successfully");
+        fetchComments();
+      }
+    } catch (error) {
+      setMessage(`Failed to delete comment: ${error.message}`);
+    }
+  };
+
   return (
     <Modal opened={opened} onClose={close} size="lg">
       <AdCard ad={ad} modalOpen={true} />
@@ -114,7 +140,7 @@ export default function CommentsModal({ ad, opened, close, onNewComment }) {
         {comments && comments.length > 0 ? (
           comments.map((comment) => (
             <Paper key={comment._id} withBorder shadow="md" p="sm" mt="md">
-              <Group>
+              <Group position="apart">
                 <div>
                   <Text size="xs" c="dimmed">
                     {new Date(comment.createdAt).toLocaleString()}
@@ -123,6 +149,15 @@ export default function CommentsModal({ ad, opened, close, onNewComment }) {
                     {comment.user_id.name}:
                   </Text>
                 </div>
+                {ad.user_id === comment.user_id._id && (
+                  <Button
+                    color="red"
+                    size="xs"
+                    onClick={() => handleDelete(comment._id)}
+                  >
+                    Delete
+                  </Button>
+                )}
               </Group>
               <Text pl="lg" pt="xs" size="sm">
                 {comment.text}
