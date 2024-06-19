@@ -27,7 +27,7 @@ export default function CommentsModal({ ad, opened, close, onNewComment }) {
     if (opened) {
       fetchComments();
     }
-  }, [opened, ad._id]);
+  }, [opened]);
 
   const fetchComments = async () => {
     try {
@@ -70,8 +70,8 @@ export default function CommentsModal({ ad, opened, close, onNewComment }) {
 
       if (response.ok) {
         setMessage("Comment created successfully");
-        setText(""); // Clear the text input after submitting
-        fetchComments(); // Fetch comments after adding a new comment
+        setText(""); 
+        fetchComments();
         onNewComment(); // to re-render CommentsButton component with updated comment count
       } else {
         setMessage(`${data.error}`);

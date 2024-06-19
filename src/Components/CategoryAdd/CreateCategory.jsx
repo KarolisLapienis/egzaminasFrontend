@@ -66,7 +66,7 @@ const CreateCategory = () => {
       if (response.ok) {
         setName("");
         setMessage("Category created successfully");
-        setCategories([...categories, data.category]); // Add the new category to the list
+        setCategories([...categories, data.category]);
       } else {
         setMessage(`Category creation failed: ${data.error}`);
       }

@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
   useMantineTheme,
-} from "@mantine/core"; // Import Mantine components
+} from "@mantine/core";
 
 const BlockAdPage = ({ selectedCategory }) => {
   const [ads, setAds] = useState([]);

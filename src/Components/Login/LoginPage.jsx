@@ -48,8 +48,8 @@ function LoginPage({ setUser }) {
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
-      setUser(user); //! Butina updatinti userio state, kitaip prisiloginus reikes page refresho kad pamatytu specifinius komponentus pagal userio role. Updatinimas vyksta propsuose ir app.jsx
-
+      setUser(user); 
+      
       if (user.role === "admin") {
         navigate("/");
       } else {

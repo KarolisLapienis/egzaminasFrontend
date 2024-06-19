@@ -14,7 +14,7 @@ const AdCard = ({ ad, onBlock, modalOpen }) => {
       padding="lg"
       radius="md"
       withBorder
-      style={{ height: "350px", width: "100%" }}
+      style={{ height: "350px", width: "400px" }}
     >
       <Card.Section>
         <Image

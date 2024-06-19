@@ -30,7 +30,6 @@ const Header = ({ user, setUser, onCategorySelect }) => {
     useDisclosure(false);
   const theme = useMantineTheme();
 
-  // Fetch categories from the backend
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -67,21 +66,18 @@ const Header = ({ user, setUser, onCategorySelect }) => {
     </UnstyledButton>
   ));
 
-  // Determine if the category select dropdown should be shown
   const shouldShowCategoryDropdown =
     location.pathname.includes("/blockAdPage") ||
     location.pathname.includes("/favoriteAds") ||
     location.pathname.includes("/myAds") ||
     location.pathname === "/";
 
-  // Handle logout action
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    navigate("/"); // Redirect to login page after logout
-    // Force re-render by forcing a state update
-    setCategories([]); // Clear categories or reset any other relevant state
+    navigate("/");
+    setCategories([]);
   };
 
   return (
@@ -145,14 +141,14 @@ const Header = ({ user, setUser, onCategorySelect }) => {
                     className={classes.link}
                     onClick={() => navigate("/myAds")}
                   >
-                    My ads
+                    My Ads
                   </a>
                   <a
                     href=""
                     className={classes.link}
                     onClick={() => navigate("/createAd")}
                   >
-                    Upload new ad
+                    Create Ad
                   </a>
                 </>
               )}

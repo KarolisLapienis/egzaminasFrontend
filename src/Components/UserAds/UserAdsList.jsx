@@ -90,6 +90,27 @@ const UserAdsList = ({ selectedCategory }) => {
     }
   };
 
+  const handleDelete = async (adId) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/ads/${adId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        setAds((prevAds) => prevAds.filter((ad) => ad._id !== adId));
+      } else {
+        console.error("Failed to delete ad:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting ad:", error);
+    }
+  };
+
   const handleEdit = (ad) => {
     setEditingAd(ad);
     setShowEditModal(true);
@@ -137,10 +158,18 @@ const UserAdsList = ({ selectedCategory }) => {
           <div className={styles.adsList}>
             {filteredAds.length > 0 ? (
               filteredAds.map((ad) => (
-                <div key={ad._id}>
+                <div key={ad._id} className={styles.adCardContainer}>
                   <AdCard ad={ad} onSave={handleSave} />
                   <Button onClick={() => handleEdit(ad)} variant="outline">
                     Edit
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(ad._id)}
+                    variant="outline"
+                    color="red"
+                    ml={5}
+                  >
+                    Delete
                   </Button>
                 </div>
               ))
