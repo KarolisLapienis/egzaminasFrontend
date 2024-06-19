@@ -1,0 +1,11 @@
+.adsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2em;
+}
+
+.divider {
+  box-shadow: 0 0 10px rgb(104, 189, 218);
+}
